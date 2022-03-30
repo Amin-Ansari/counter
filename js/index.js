@@ -4,7 +4,7 @@ const resetButton = document.querySelector("#reset");
 var theNumber = document.querySelector("p");
 var currentValue = Number(theNumber.innerHTML);
 
-// the function which sets the numbers color according to their value
+// the function which sets the color of numbers according to their value
 function setTheColor() {
   if (theNumber.innerHTML > 0) {
     if (theNumber.classList.contains("zero-color")) {
