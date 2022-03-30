@@ -24,7 +24,8 @@ function decreaseOne() {
   setTheColor();
 }
 function resttheValue() {
-  theNumber.innerHTML = 0;
+  currentValue = 0;
+  theNumber.innerHTML = currentValue;
   setTheColor();
 }
 
