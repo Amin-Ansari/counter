@@ -3,7 +3,7 @@ const decreaseButton = document.querySelector("#decrease");
 const resetButton = document.querySelector("#reset");
 var theNumber = document.querySelector("p");
 var currentValue = Number(theNumber.innerHTML);
-
+var increaseTimer;
 // the function which sets the color of numbers according to their value
 function setTheColor() {
   if (theNumber.innerHTML > 0) {
@@ -37,7 +37,9 @@ function increaseOne() {
   currentValue++;
   theNumber.innerHTML = currentValue;
   setTheColor();
+  increaseTimer = setTimeout(autoAdd, 100);
 }
+
 function decreaseOne() {
   currentValue--;
   theNumber.innerHTML = currentValue;
@@ -48,8 +50,18 @@ function resttheValue() {
   theNumber.innerHTML = currentValue;
   setTheColor();
 }
+function autoAdd() {
+  currentValue++;
+  theNumber.innerHTML = currentValue;
+  setTheColor();
+  increaseTimer = setTimeout(autoAdd, 100);
+}
 
 //The click events
-increaseButton.addEventListener("click", increaseOne);
+increaseButton.addEventListener("mousedown", increaseOne);
+increaseButton.addEventListener("mouseup", function () {
+  clearInterval(increaseTimer);
+});
+
 decreaseButton.addEventListener("click", decreaseOne);
 resetButton.addEventListener("click", resttheValue);
