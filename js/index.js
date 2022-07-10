@@ -3,7 +3,8 @@ const decreaseButton = document.querySelector("#decrease");
 const resetButton = document.querySelector("#reset");
 var theNumber = document.querySelector("p");
 var currentValue = Number(theNumber.innerHTML);
-var increaseTimer;
+var timer;
+
 // the function which sets the color of numbers according to their value
 function setTheColor() {
   if (theNumber.innerHTML > 0) {
@@ -37,13 +38,14 @@ function increaseOne() {
   currentValue++;
   theNumber.innerHTML = currentValue;
   setTheColor();
-  increaseTimer = setTimeout(autoAdd, 100);
+  timer = setTimeout(autoAdd, 100);
 }
 
 function decreaseOne() {
   currentValue--;
   theNumber.innerHTML = currentValue;
   setTheColor();
+  timer = setTimeout(autoDecrease, 100);
 }
 function resttheValue() {
   currentValue = 0;
@@ -54,14 +56,22 @@ function autoAdd() {
   currentValue++;
   theNumber.innerHTML = currentValue;
   setTheColor();
-  increaseTimer = setTimeout(autoAdd, 100);
+  timer = setTimeout(autoAdd, 100);
+}
+function autoDecrease() {
+  currentValue--;
+  theNumber.innerHTML = currentValue;
+  setTheColor();
+  timer = setTimeout(autoDecrease, 100);
 }
 
 //The click events
 increaseButton.addEventListener("mousedown", increaseOne);
 increaseButton.addEventListener("mouseup", function () {
-  clearInterval(increaseTimer);
+  clearInterval(timer);
 });
-
-decreaseButton.addEventListener("click", decreaseOne);
+decreaseButton.addEventListener("mousedown", decreaseOne);
+decreaseButton.addEventListener("mouseup", function () {
+  clearInterval(timer);
+});
 resetButton.addEventListener("click", resttheValue);
